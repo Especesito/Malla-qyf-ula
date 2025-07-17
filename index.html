@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Malla Curricular Química y Farmacia</title>
+  <style>
+    :root {
+      --bg: #f4f4f4; --text: #2435A3;
+      --sem-bg: #eef0ff; --sem-border: #4650D4;
+      --ramo-bg: #b6a8f9; --ramo-hover: #a7e8f5;
+      --ramo-text: #fff; --tooltip-bg: #2435A3;
+      --approved-bg: #c0c0c0; --approved-text: #666;
+      --blocked-opacity: 0.5;
+    }
+    body.dark-mode {
+      --bg: #121212; --text: #e0e0e0;
+      --sem-bg: #1e1e1e; --sem-border: #555;
+      --ramo-bg: #333; --ramo-hover: #444;
+      --ramo-text: #e0e0e0; --tooltip-bg: #000;
+      --approved-bg: #444; --approved-text: #888;
+      --blocked-opacity: 0.3;
+    }
+    body {
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0; padding: 1rem;
+      transition: background 0.3s, color 0.3s;
+    }
+    h1 { text-align:center; margin:0; color:var(--text); }
+    h3 { text-align:center; margin:0.2rem 0 1rem; color:var(--sem-border); }
+    #toggle-theme {
+      position:fixed; top:1rem; right:1rem;
+      font-size:1.2rem; padding:0.5rem; border:none; border-radius:5px;
+      background:var(--sem-border); color:#fff; cursor:pointer; z-index:1000;
+      transition: background 0.3s;
+    }
+    #toggle-theme:hover { background:var(--ramo-hover); }
+    .malla {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:1rem; max-width:1200px; margin:0 auto;
+    }
+    .semestre {
+      background:var(--sem-bg);
+      border:2px solid var(--sem-border);
+      border-radius:12px; padding:0.5rem;
+    }
+    .semestre h2 {
+      margin:0.5rem 0; font-size:1.1rem;
+      color:var(--sem-border); text-align:center;
+    }
+    .ramo {
+      background:var(--ramo-bg); border-radius:10px;
+      margin:0.4rem 0; padding:0.6rem; color:var(--ramo-text);
+      position:relative; cursor:pointer;
+      transition: background 0.3s, color 0.3s, opacity 0.3s;
+    }
+    .ramo.blocked { opacity:var(--blocked-opacity); }
+    .ramo:hover:not(.blocked) {
+      background:var(--ramo-hover); color:var(--text);
+    }
+    .ramo.approved {
+      background:var(--approved-bg); color:var(--approved-text);
+      text-decoration:line-through;
+    }
+    .ramo[data-desc]:not([data-desc=""])::after {
+      content:attr(data-desc);
+      position:absolute; bottom:110%; left:50%; transform:translateX(-50%);
+      background:var(--tooltip-bg); color:#fff; padding:0.5rem;
+      border-radius:6px; opacity:0; visibility:hidden;
+      white-space:pre-wrap; width:200px; transition:opacity 0.2s; z-index:10;
+    }
+    .ramo[data-desc]:not([data-desc=""]):hover::after {
+      opacity:1; visibility:visible;
+    }
+  </style>
+</head>
+<body>
+  <button id="toggle-theme" title="Cambiar tema">🌙</button>
+  <h1>Malla Curricular - Química y Farmacia</h1>
+  <h3>ULagos</h3>
+  <div class="malla">
+    <!-- 1° Semestre -->
+    <div class="semestre"><h2>1°</h2>
+      <div class="ramo" data-sem="1" id="Química General"
+           data-desc="Identifica los conceptos básicos de la química a nivel atómico y molecular con énfasis en disoluciones acuosas."
+           data-prereq="">Química General</div>
+      <div class="ramo" data-sem="1" id="Técnicas Básicas de Laboratorio"
+           data-desc="Operaciones comunes de laboratorio, hábitos de trabajo y seguridad."
+           data-prereq="">Técnicas Básicas de Laboratorio</div>
+      <div class="ramo" data-sem="1" id="Biología Celular y Molecular"
+           data-desc="Aspectos básicos de biología celular, molecular y genética."
+           data-prereq="">Biología Celular y Molecular</div>
+      <div class="ramo" data-sem="1" id="Álgebra"
+           data-desc="Herramientas matemáticas básicas para cálculo y modelado."
+           data-prereq="">Álgebra</div>
+      <div class="ramo" data-sem="1" id="Introducción a las Ciencias Farmacéuticas"
+           data-desc="Ámbitos del ejercicio farmacéutico y rol profesional."
+           data-prereq="">Introducción a las Ciencias Farmacéuticas</div>
+      <div class="ramo" data-sem="1" id="Comunicación"
+           data-desc="" data-prereq="">Comunicación</div>
+    </div>
+    <!-- 2° Semestre -->
+    <div class="semestre"><h2>2°</h2>
+      <div class="ramo" data-sem="2" id="Química General Aplicada"
+           data-desc="Equilibrio, ácido-base y electroquímica en disoluciones."
+           data-prereq="Técnicas Básicas de Laboratorio|Química General">Química General Aplicada</div>
+      <div class="ramo" data-sem="2" id="Anatomía e histología"
+           data-desc="Estructura anatómica e histológica de órganos y tejidos."
+           data-prereq="Biología Celular y Molecular">Anatomía e histología</div>
+      <div class="ramo" data-sem="2" id="Cálculo"
+           data-desc="Modelamiento matemático de fenómenos dinámicos en una variable."
+           data-prereq="Álgebra">Cálculo</div>
+      <div class="ramo" data-sem="2" id="Física para Ciencias"
+           data-desc="Conceptos de mecánica, termodinámica, electricidad y ondas."
+           data-prereq="">Física para Ciencias</div>
+      <div class="ramo" data-sem="2" id="Ciudadanía orientada al buen vivir"
+           data-desc="" data-prereq="">Ciudadanía orientada al buen vivir</div>
+      <div class="ramo" data-sem="2" id="Inglés I"
+           data-desc="" data-prereq="">Inglés I</div>
+    </div>
+    <!-- 3° Semestre -->
+    <div class="semestre"><h2>3°</h2>
+      <div class="ramo" data-sem="3" id="Química Orgánica"
+           data-desc="Estructura y reactividad de moléculas orgánicas."
+           data-prereq="">Química Orgánica</div>
+      <div class="ramo" data-sem="3" id="Química Analítica"
+           data-desc="Determinación cualitativa y cuantitativa de especies químicas."
+           data-prereq="Química General Aplicada">Química Analítica</div>
+      <div class="ramo" data-sem="3" id="Fisiología General"
+           data-desc="Funcionamiento integral del organismo y homeostasis."
+           data-prereq="Anatomía e histología">Fisiología General</div>
+      <div class="ramo" data-sem="3" id="Fisicoquímica"
+           data-desc="Aplicación de termodinámica a procesos químicos."
+           data-prereq="Física para Ciencias">Fisicoquímica</div>
+      <div class="ramo" data-sem="3" id="Epidemiología"
+           data-desc="" data-prereq="">Epidemiología</div>
+      <div class="ramo" data-sem="3" id="Inglés II"
+           data-desc="" data-prereq="">Inglés II</div>
+      <div class="ramo" data-sem="3" id="Electivo de formación integral"
+           data-desc="" data-prereq="">Electivo de formación integral</div>
+    </div>
+    <!-- 4° Semestre -->
+    <div class="semestre"><h2>4°</h2>
+      <div class="ramo" data-sem="4" id="Química Orgánica Aplicada"
+           data-desc="Descripción y análisis experimental de moléculas orgánicas."
+           data-prereq="Química Orgánica">Química Orgánica Aplicada</div>
+      <div class="ramo" data-sem="4" id="Análisis Instrumental"
+           data-desc="Comparación de técnicas instrumentales de análisis."
+           data-prereq="Química Analítica">Análisis Instrumental</div>
+      <div class="ramo" data-sem="4" id="Fisiopatología"
+           data-desc="Mecanismos de enfermedad y manifestaciones clínicas."
+           data-prereq="Fisiología General">Fisiopatología</div>
+      <div class="ramo" data-sem="4" id="Bioquímica General"
+           data-desc="Fundamentos bioquímicos de procesos celulares."
+           data-prereq="">Bioquímica General</div>
+      <div class="ramo" data-sem="4" id="Salud Pública"
+           data-desc="" data-prereq="">Salud Pública</div>
+      <div class="ramo" data-sem="4" id="Bioestadística"
+           data-desc="" data-prereq="">Bioestadística</div>
+      <div class="ramo" data-sem="4" id="Modelo de atención en salud"
+           data-desc="" data-prereq="">Modelo de atención en salud</div>
+      <div class="ramo" data-sem="4" id="Inglés III"
+           data-desc="" data-prereq="">Inglés III</div>
+      <div class="ramo" data-sem="4" id="Evaluación logro perfil de egreso"
+           data-desc="Evaluación para práctica temprana."
+           data-prereq="">Evaluación logro perfil de egreso</div>
+    </div>
+    <!-- 5° Semestre -->
+    <div class="semestre"><h2>5°</h2>
+      <div class="ramo" data-sem="5" id="Farmacognosia y fitoterapia"
+           data-desc="Caracterización de principios activos vegetales."
+           data-prereq="Química Orgánica Aplicada">Farmacognosia y fitoterapia</div>
+      <div class="ramo" data-sem="5" id="Farmacoquímica y análisis de medicamentos"
+           data-desc="Relación estructura-actividad farmacológica."
+           data-prereq="Análisis Instrumental">Farmacoquímica y análisis de medicamentos</div>
+      <div class="ramo" data-sem="5" id="Bioquímica clínica y hematología general"
+           data-desc="Procesos bioquímicos normales y patológicos."
+           data-prereq="Bioquímica General">Bioquímica clínica y hematología general</div>
+      <div class="ramo" data-sem="5" id="Inmunología"
+           data-desc="Mecanismos de la respuesta inmune."
+           data-prereq="">Inmunología</div>
+      <div class="ramo" data-sem="5" id="Bromatología y nutrición humana"
+           data-desc="Sustancias químicas en alimentos y nutrición."
+           data-prereq="">Bromatología y nutrición humana</div>
+      <div class="ramo" data-sem="5" id="Salud Pública 2"
+           data-desc="" data-prereq="">Salud Pública</div>
+      <div class="ramo" data-sem="5" id="Práctica temprana"
+           data-desc="Primera práctica profesional."
+           data-prereq="">Práctica temprana</div>
+    </div>
+    <!-- 6° Semestre -->
+    <div class="semestre"><h2>6°</h2>
+      <div class="ramo" data-sem="6" id="Farmacología general y molecular"
+           data-desc="Acción de fármacos a nivel molecular."
+           data-prereq="Farmacoquímica y análisis de medicamentos">Farmacología general y molecular</div>
+      <div class="ramo" data-sem="6" id="Tecnología Farmacéutica sólidos y líquidos"
+           data-desc="Elaboración de medicamentos sólidos y líquidos."
+           data-prereq="Farmacoquímica y análisis de medicamentos">Tecnología Farmacéutica sólidos y líquidos</div>
+      <div class="ramo" data-sem="6" id="Microbiología y Parasitología"
+           data-desc="Estudio de microorganismos y parásitos."
+           data-prereq="Bioquímica clínica y hematología general">Microbiología y Parasitología</div>
+      <div class="ramo" data-sem="6" id="Legislación farmacéutica"
+           data-desc="Normativa y deontología farmacéutica."
+           data-prereq="">Legislación farmacéutica</div>
+      <div class="ramo" data-sem="6" id="Metodología de la Investigación"
+           data-desc="" data-prereq="">Metodología de la Investigación</div>
+      <div class="ramo" data-sem="6" id="Educación en Salud"
+           data-desc="" data-prereq="">Educación en Salud</div>
+    </div>
+    <!-- 7° Semestre -->
+    <div class="semestre"><h2>7°</h2>
+      <div class="ramo" data-sem="7" id="Farmacología de sistemas"
+           data-desc="Farmacodinámica y efectos adversos."
+           data-prereq="Farmacología general y molecular">Farmacología de sistemas</div>
+      <div class="ramo" data-sem="7" id="Farmacología de Quimioterapéuticos"
+           data-desc="Acción de quimioterapéuticos."
+           data-prereq="Microbiología y Parasitología">Farmacología de Quimioterapéuticos</div>
+      <div class="ramo" data-sem="7" id="Tecnología Farmacéutica Semisólidos"
+           data-desc="Producción de semisólidos."
+           data-prereq="Tecnología Farmacéutica sólidos y líquidos">Tecnología Farmacéutica Semisólidos</div>
+      <div class="ramo" data-sem="7" id="Gestión Farmacéutica"
+           data-desc="Rol gestor y técnico farmacéutico."
+           data-prereq="">Gestión Farmacéutica</div>
+      <div class="ramo" data-sem="7" id="Seminario de investigación"
+           data-desc="" data-prereq="">Seminario de investigación</div>
+      <div class="ramo" data-sem="7" id="Electivo de Formación Integral"
+           data-desc="" data-prereq="">Electivo de Formación Integral</div>
+      <div class="ramo" data-sem="7" id="Práctica Temprana 2"
+           data-desc="Segunda práctica profesional."
+           data-prereq="">Práctica Temprana 2</div>
+    </div>
+    <!-- 8° Semestre -->
+    <div class="semestre"><h2>8°</h2>
+      <div class="ramo" data-sem="8" id="Farmacoterapia de patologías infecciosas"
+           data-desc="Diseño y seguimiento de terapias antimicrobianas."
+           data-prereq="Farmacología de Quimioterapéuticos">Farmacoterapia de patologías infecciosas</div>
+      <div class="ramo" data-sem="8" id="Farmacoterapia de patologías no infecciosas"
+           data-desc="Terapias farmacológicas para patologías crónicas."
+           data-prereq="Farmacología de sistemas">Farmacoterapia de patologías no infecciosas</div>
+      <div class="ramo" data-sem="8" id="Farmacocinética y biofarmacia"
+           data-desc="Procesos LADME de los fármacos."
+           data-prereq="Tecnología Farmacéutica Semisólidos">Farmacocinética y biofarmacia</div>
+      <div class="ramo" data-sem="8" id="Toxicología"
+           data-desc="Efectos nocivos y técnicas de detección."
+           data-prereq="">Toxicología</div>
+      <div class="ramo" data-sem="8" id="Farmacología clínica y atención farmacéutica"
+           data-desc="Evaluación terapéutica en pacientes."
+           data-prereq="">Farmacología clínica y atención farmacéutica</div>
+      <div class="ramo" data-sem="8" id="Actividad de profundización disciplinar"
+           data-desc="" data-prereq="">Actividad de profundización disciplinar</div>
+      <div class="ramo" data-sem="8" id="Gestión de Proyectos en Salud"
+           data-desc="" data-prereq="">Gestión de Proyectos en Salud</div>
+      <div class="ramo" data-sem="8" id="Evaluación logro perfil de egreso"
+           data-desc="Evaluación final de perfil profesional."
+           data-prereq="">Evaluación logro perfil de egreso</div>
+    </div>
+    <!-- 9° Semestre -->
+    <div class="semestre"><h2>9°</h2>
+      <div class="ramo" data-sem="9" id="Práctica Profesional Comunitaria"
+           data-desc="" data-prereq="">Práctica Profesional Comunitaria</div>
+      <div class="ramo" data-sem="9" id="Unidad de Investigación I o Internado I"
+           data-desc="" data-prereq="Práctica Profesional Comunitaria">Unidad de Investigación I o Internado I</div>
+    </div>
+    <!-- 10° Semestre -->
+    <div class="semestre"><h2>10°</h2>
+      <div class="ramo" data-sem="10" id="Unidad de Investigación II o Internado II"
+           data-desc="" data-prereq="Unidad de Investigación I o Internado I">Unidad de Investigación II o Internado II</div>
+      <div class="ramo" data-sem="10" id="Actividad de Titulación"
+           data-desc="" data-prereq="Unidad de Investigación II o Internado II">Actividad de Titulación</div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle oscuro/claro
+    const btn = document.getElementById('toggle-theme');
+    btn.onclick = () => {
+      document.body.classList.toggle('dark-mode');
+      const d = document.body.classList.contains('dark-mode');
+      localStorage.setItem('dark-mode', d);
+      btn.textContent = d ? '☀️' : '🌙';
+    };
+    if (localStorage.getItem('dark-mode')==='true') {
+      document.body.classList.add('dark-mode');
+      btn.textContent='☀️';
+    }
+
+    const ramos = Array.from(document.querySelectorAll('.ramo'));
+
+    // Comprueba todos de 1° a 8°
+    function todosPrimeros8(){
+      return ramos
+        .filter(r=> +r.dataset.sem < 9)
+        .every(r=> r.classList.contains('approved'));
+    }
+
+    function updateBloqueos(){
+      ramos.forEach(el=>{
+        let blocked = false;
+        const sem = +el.dataset.sem;
+        const reqs = el.dataset.prereq.split('|').filter(x=>x);
+        if (reqs.length && !reqs.every(id=> document.getElementById(id).classList.contains('approved'))){
+          blocked = true;
+        }
+        if (sem >=9 && !todosPrimeros8()){
+          blocked = true;
+        }
+        el.classList.toggle('blocked', blocked);
+      });
+    }
+
+    function init(){
+      ramos.forEach(el=>{
+        if (localStorage.getItem(el.id)==='true'){
+          el.classList.add('approved');
+        }
+        el.onclick = ()=>{
+          const sem=+el.dataset.sem;
+          if (sem>=9 && !todosPrimeros8()){
+            alert('Debes aprobar TODOS los ramos de 1° a 8° semestre primero.');
+            return;
+          }
+          const reqs=el.dataset.prereq.split('|').filter(x=>x);
+          if (reqs.length && !reqs.every(id=> document.getElementById(id).classList.contains('approved'))){
+            alert('Debes aprobar primero: '+reqs.join(', '));
+            return;
+          }
+          el.classList.toggle('approved');
+          localStorage.setItem(el.id, el.classList.contains('approved'));
+          updateBloqueos();
+        };
+      });
+      updateBloqueos();
+    }
+    init();
+  </script>
+</body>
+</html>
